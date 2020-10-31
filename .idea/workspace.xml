@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="52e33278-2c47-4aec-a42c-83f133cf5b6f" name="Default Changelist" comment="" />
+    <list default="true" id="52e33278-2c47-4aec-a42c-83f133cf5b6f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/svc/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/svc/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/svc/api/logging.go" beforeDir="false" afterPath="$PROJECT_DIR$/svc/api/logging.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/svc/api/svc/http/endpoint.go" beforeDir="false" afterPath="$PROJECT_DIR$/svc/api/svc/http/endpoint.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/svc/api/svc/http/requests.go" beforeDir="false" afterPath="$PROJECT_DIR$/svc/api/svc/http/requests.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/svc/api/svc/http/responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/svc/api/svc/http/responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/svc/api/svc/http/transport.go" beforeDir="false" afterPath="$PROJECT_DIR$/svc/api/svc/http/transport.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/svc/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/svc/service.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,6 +52,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/svc" />
       <recent name="$PROJECT_DIR$/users" />
       <recent name="$PROJECT_DIR$/errors" />
     </key>
