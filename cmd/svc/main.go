@@ -14,41 +14,25 @@ import (
 )
 
 const (
-	defLogLevel   = "error"
-	defHTTPPort   = "9021"
-	defJaegerURL  = ""
-	defServerCert = ""
-	defServerKey  = ""
-	defSecret     = "secret"
+	defHTTPPort = "9021"
+	defUsername = "secret"
 
-	envLogLevel   = "MF_MFXKIT_LOG_LEVEL"
-	envHTTPPort   = "MF_MFXKIT_HTTP_PORT"
-	envJaegerURL  = "MF_JAEGER_URL"
-	envServerCert = "MF_MFXKIT_SERVER_CERT"
-	envServerKey  = "MF_MFXKIT_SERVER_KEY"
-	envSecret     = "MF_MFXKIT_SECRET"
+	envHTTPPort = "KITSVC_HTTP_PORT"
+	envUsername = "KITSVC_SECRET"
 )
 
 type config struct {
-	logLevel     string
-	httpPort     string
-	authHTTPPort string
-	authGRPCPort string
-	jaegerURL    string
-	serverCert   string
-	serverKey    string
-	secret       string
+	httpPort string
+	username string
 }
-
 
 func main() {
 
 	cfg := loadConfig()
 
-	logger:= log.NewLogfmtLogger(os.Stderr)
+	logger := log.NewLogfmtLogger(os.Stderr)
 
-
-	service := newService("piusalfred",logger)
+	service := newService(cfg.username, logger)
 
 	errs := make(chan error, 2)
 
@@ -73,12 +57,8 @@ func newService(username string, logger log.Logger) svc.Service {
 
 func loadConfig() config {
 	return config{
-		logLevel:   kitsvc.Env(envLogLevel, defLogLevel),
-		httpPort:   kitsvc.Env(envHTTPPort, defHTTPPort),
-		serverCert: kitsvc.Env(envServerCert, defServerCert),
-		serverKey:  kitsvc.Env(envServerKey, defServerKey),
-		jaegerURL:  kitsvc.Env(envJaegerURL, defJaegerURL),
-		secret:     kitsvc.Env(envSecret, defSecret),
+		httpPort: kitsvc.Env(envHTTPPort, defHTTPPort),
+		username: kitsvc.Env(envUsername, defUsername),
 	}
 }
 

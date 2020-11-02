@@ -10,14 +10,12 @@ var _ svc.Service = (*loggingMiddleware)(nil)
 
 type loggingMiddleware struct {
 	logger log.Logger
-	svc svc.Service
+	svc    svc.Service
 }
-
 
 func LoggingMiddleware(svc svc.Service, logger log.Logger) svc.Service {
 	return &loggingMiddleware{logger, svc}
 }
-
 
 func (l loggingMiddleware) UpperCase(s string) (output string, err error) {
 	defer func(begin time.Time) {
@@ -34,7 +32,7 @@ func (l loggingMiddleware) UpperCase(s string) (output string, err error) {
 	return
 }
 
-func (l loggingMiddleware) Count(s string) (n int ){
+func (l loggingMiddleware) Count(s string) (n int) {
 	defer func(begin time.Time) {
 		l.logger.Log(
 			"method", "count",
@@ -47,4 +45,3 @@ func (l loggingMiddleware) Count(s string) (n int ){
 	n = l.svc.Count(s)
 	return
 }
-

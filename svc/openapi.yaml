@@ -1,0 +1,13 @@
+openapi: 3.0.0
+info:
+  title: svc open api documentaions
+  description: documents how svc service performs
+  version: 1.0.0
+servers:
+  - url: 'https'
+paths:
+  /svc/count:
+    post:
+      summary: Count the number of characters in a string
+      requestBody:
+        $ref: 

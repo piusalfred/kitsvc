@@ -4,12 +4,12 @@
     <list default="true" id="52e33278-2c47-4aec-a42c-83f133cf5b6f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/svc/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/svc/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/svc/api/logging.go" beforeDir="false" afterPath="$PROJECT_DIR$/svc/api/logging.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/svc/api/svc/http/endpoint.go" beforeDir="false" afterPath="$PROJECT_DIR$/svc/api/svc/http/endpoint.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/svc/api/svc/http/requests.go" beforeDir="false" afterPath="$PROJECT_DIR$/svc/api/svc/http/requests.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/svc/api/svc/http/responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/svc/api/svc/http/responses.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/svc/api/svc/http/transport.go" beforeDir="false" afterPath="$PROJECT_DIR$/svc/api/svc/http/transport.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/svc/errors.go" beforeDir="false" afterPath="$PROJECT_DIR$/svc/errors.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/svc/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/svc/service.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +22,7 @@
       <list>
         <option value="Go Application" />
         <option value="Go File" />
+        <option value="OpenAPI" />
       </list>
     </option>
   </component>
@@ -65,6 +66,10 @@
     <integration-enabled>true</integration-enabled>
   </component>
   <component name="WindowStateProjectService">
+    <state x="312" y="66" width="736" height="637" key="#Inspections" timestamp="1604169597408">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="312" y="66" width="736" height="637" key="#Inspections/0.0.1366.768@0.0.1366.768" timestamp="1604169597408" />
     <state x="466" y="143" width="428" height="484" key="FileChooserDialogImpl" timestamp="1604098039202">
       <screen x="0" y="0" width="1366" height="768" />
     </state>

@@ -12,7 +12,6 @@ import (
 	kithttp "github.com/go-kit/kit/transport/http"
 )
 
-
 const (
 	contentType = "application/json"
 )
@@ -68,8 +67,7 @@ func encodeError(_ context.Context, err error, w http.ResponseWriter) {
 	}
 }
 
-
-func MakeHandler(service svc.Service) http.Handler{
+func MakeHandler(service svc.Service) http.Handler {
 
 	opts := []kithttp.ServerOption{
 		kithttp.ServerErrorEncoder(encodeError),
@@ -91,10 +89,9 @@ func MakeHandler(service svc.Service) http.Handler{
 		opts...,
 	)
 
-	r.Post("/svc/uppercase",upperCaseHandler)
+	r.Post("/svc/uppercase", upperCaseHandler)
 
-	r.Post("/svc/count",countHandler)
-
+	r.Post("/svc/count", countHandler)
 
 	return r
 }

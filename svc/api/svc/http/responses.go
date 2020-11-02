@@ -1,7 +1,7 @@
 package http
 
 type upperCaseResp struct {
-	V string `json:"v"`
+	V   string `json:"v"`
 	Err string `json:",omitempty"`
 }
 
