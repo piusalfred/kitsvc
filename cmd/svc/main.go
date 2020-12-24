@@ -6,7 +6,7 @@ import (
 	"github.com/piusalfred/kitsvc"
 	"github.com/piusalfred/kitsvc/svc"
 	"github.com/piusalfred/kitsvc/svc/api"
-	svchttp "github.com/piusalfred/kitsvc/svc/api/svc/http"
+	svchttp "github.com/piusalfred/kitsvc/svc/api/http"
 	"net/http"
 	"os"
 	"os/signal"
@@ -30,7 +30,7 @@ func main() {
 
 	cfg := loadConfig()
 
-	logger := log.NewLogfmtLogger(os.Stderr)
+	logger := log.NewJSONLogger(os.Stdout)
 
 	service := newService(cfg.username, logger)
 

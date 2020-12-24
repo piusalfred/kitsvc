@@ -22,7 +22,7 @@ var (
 )
 
 func decodeUppercaseRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var request upperCaseReq
+	var request UppercaseRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
 		return nil, err
 	}
@@ -30,10 +30,18 @@ func decodeUppercaseRequest(_ context.Context, r *http.Request) (interface{}, er
 }
 
 func decodeCountRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var request countReq
+	var request CountRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
 		return nil, err
 	}
+	if request.String == ""{
+		return nil, errors.New("invalid request body")
+	}
+	return request, nil
+}
+
+func decodeVersionRequest(_ context.Context, r *http.Request) (interface{}, error) {
+	var request VersionRequest
 	return request, nil
 }
 
@@ -62,9 +70,32 @@ func encodeError(_ context.Context, err error, w http.ResponseWriter) {
 		case *json.UnmarshalTypeError:
 			w.WriteHeader(http.StatusBadRequest)
 		default:
+
 			w.WriteHeader(http.StatusInternalServerError)
 		}
 	}
+}
+
+func ErrorEncoder(_ context.Context, err error, w http.ResponseWriter) {
+	w.WriteHeader(err2code(err))
+	json.NewEncoder(w).Encode(errorWrapper{Error: err.Error()})
+}
+func ErrorDecoder(r *http.Response) error {
+	var w errorWrapper
+	if err := json.NewDecoder(r.Body).Decode(&w); err != nil {
+		return err
+	}
+	return errors.New(w.Error)
+}
+
+// This is used to set the http status, see an example here :
+// https://github.com/go-kit/kit/blob/master/examples/addsvc/pkg/addtransport/http.go#L133
+func err2code(err error) int {
+	return http.StatusInternalServerError
+}
+
+type errorWrapper struct {
+	Error string `json:"error"`
 }
 
 func MakeHandler(service svc.Service) http.Handler {
@@ -76,7 +107,7 @@ func MakeHandler(service svc.Service) http.Handler {
 	r := bone.New()
 
 	upperCaseHandler := kithttp.NewServer(
-		MakeUpperCaseEndpoint(service),
+		MakeUppercaseEndpoint(service),
 		decodeUppercaseRequest,
 		encodeResponse,
 		opts...,
@@ -89,9 +120,17 @@ func MakeHandler(service svc.Service) http.Handler {
 		opts...,
 	)
 
+	versionHandler := kithttp.NewServer(
+		MakeVersionEndpoint(service),
+		decodeVersionRequest,
+		encodeResponse,
+		opts ...)
+
 	r.Post("/svc/uppercase", upperCaseHandler)
 
 	r.Post("/svc/count", countHandler)
+
+	r.Get("/svc/version", versionHandler)
 
 	return r
 }
