@@ -64,12 +64,6 @@ func loadConfig() config {
 
 func startHTTPServer(handler http.Handler, port string, cfg config, logger log.Logger, errs chan error) {
 	p := fmt.Sprintf(":%s", port)
-	/*if cfg.serverCert != "" || cfg.serverKey != "" {
-		logger.Info(fmt.Sprintf("Mfxkit service started using https on port %s with cert %s key %s",
-			port, cfg.serverCert, cfg.serverKey))
-		errs <- http.ListenAndServeTLS(p, cfg.serverCert, cfg.serverKey, handler)
-		return
-	}*/
 	logger.Log(fmt.Sprintf("svc service started using http on port %s", cfg.httpPort))
 	errs <- http.ListenAndServe(p, handler)
 }

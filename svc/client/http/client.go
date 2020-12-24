@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"github.com/go-kit/kit/endpoint"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/piusalfred/kitsvc/svc"
@@ -17,32 +18,47 @@ import (
 // New returns an AddService backed by an HTTP server living at the remote
 // instance. We expect instance to come from a service discovery system, so
 // likely of the form "host:port".
-func NewClient(instance string, options map[string][]kithttp.ClientOption) (svc.Service, error) {
+func NewClient(instance string) (svc.Service, error) {
+
+	var options []kithttp.ClientOption
 
 	if !strings.HasPrefix(instance, "http") {
 		instance = "http://" + instance
 	}
+
+	fmt.Println(instance)
 	u, err := url.Parse(instance)
 	if err != nil {
 		return nil, err
 	}
+
 	var countEndpoint endpoint.Endpoint
 	{
 		countEndpoint = kithttp.NewClient(
-			"POST", copyURL(u, "/count"),
+			"POST", copyURL(u, "/svc/count"),
 			encodeHTTPGenericRequest,
 			decodeCountResponse,
-			options["Count"]...).Endpoint()
+			options...).Endpoint()
 	}
 
 	var uppercaseEndpoint endpoint.Endpoint
 	{
-		uppercaseEndpoint = kithttp.NewClient("POST", copyURL(u, "/uppercase"), encodeHTTPGenericRequest, decodeUppercaseResponse, options["Uppercase"]...).Endpoint()
+		uppercaseEndpoint = kithttp.NewClient(
+			"POST",
+			copyURL(u, "/svc/uppercase"),
+			encodeHTTPGenericRequest,
+			decodeUppercaseResponse,
+			options...).Endpoint()
 	}
 
 	var versionEndpoint endpoint.Endpoint
 	{
-		versionEndpoint = kithttp.NewClient("GET", copyURL(u, "/version"), encodeHTTPGenericRequest, decodeVersionResponse, options["Version"]...).Endpoint()
+		versionEndpoint = kithttp.NewClient(
+			"GET",
+			copyURL(u, "/svc/version"),
+			encodeHTTPGenericRequest,
+			decodeVersionResponse,
+			options...).Endpoint()
 	}
 
 	return svchttp.Endpoints{
