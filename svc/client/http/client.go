@@ -15,7 +15,7 @@ import (
 	"strings"
 )
 
-// New returns an AddService backed by an HTTP server living at the remote
+// NewClient returns an AddService backed by an HTTP server living at the remote
 // instance. We expect instance to come from a service discovery system, so
 // likely of the form "host:port".
 func NewClient(instance string) (svc.Service, error) {
@@ -35,7 +35,7 @@ func NewClient(instance string) (svc.Service, error) {
 	var countEndpoint endpoint.Endpoint
 	{
 		countEndpoint = kithttp.NewClient(
-			"POST", copyURL(u, "/svc/count"),
+			"POST", copyURL(u, svchttp.CountPath),
 			encodeHTTPGenericRequest,
 			decodeCountResponse,
 			options...).Endpoint()
@@ -45,7 +45,7 @@ func NewClient(instance string) (svc.Service, error) {
 	{
 		uppercaseEndpoint = kithttp.NewClient(
 			"POST",
-			copyURL(u, "/svc/uppercase"),
+			copyURL(u, svchttp.UppercasePath),
 			encodeHTTPGenericRequest,
 			decodeUppercaseResponse,
 			options...).Endpoint()
@@ -55,7 +55,7 @@ func NewClient(instance string) (svc.Service, error) {
 	{
 		versionEndpoint = kithttp.NewClient(
 			"GET",
-			copyURL(u, "/svc/version"),
+			copyURL(u, svchttp.VersionPath),
 			encodeHTTPGenericRequest,
 			decodeVersionResponse,
 			options...).Endpoint()

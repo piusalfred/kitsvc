@@ -126,11 +126,11 @@ func MakeHandler(service svc.Service) http.Handler {
 		encodeResponse,
 		opts ...)
 
-	r.Post("/svc/uppercase", upperCaseHandler)
+	r.Post(UppercasePath, upperCaseHandler)
 
-	r.Post("/svc/count", countHandler)
+	r.Post(CountPath, countHandler)
 
-	r.Get("/svc/version", versionHandler)
+	r.Get(VersionPath, versionHandler)
 
 	return r
 }
